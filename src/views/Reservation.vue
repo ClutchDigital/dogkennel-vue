@@ -12,7 +12,7 @@
               <div class="checkin">
                 <label for="checkin">Check In</label>
                 <el-date-picker
-                @input="checkTime(reservation.checkin_date)"
+                  @input="checkTime(reservation.checkin_date)"
                   name="checkin"
                   v-model="reservation.checkin_date"
                   type="date"
@@ -20,7 +20,11 @@
                   placeholder="Select drop off date"
                 ></el-date-picker>
                 <div class="checkin-times">
-                  <el-select v-model="reservation.checkin_time" clearable placeholder="Choose drop off time">
+                  <el-select
+                    v-model="reservation.checkin_time"
+                    clearable
+                    placeholder="Choose drop off time"
+                  >
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -42,7 +46,11 @@
                   placeholder="Select pick up date"
                 ></el-date-picker>
                 <div class="checkout-times" @click="checkTime(reservation.checkout_date)">
-                  <el-select v-model="reservation.checkout_time" clearable placeholder="Choose pick up time">
+                  <el-select
+                    v-model="reservation.checkout_time"
+                    clearable
+                    placeholder="Choose pick up time"
+                  >
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -94,19 +102,17 @@
           <p>Dogs: $20 per dog per day</p>
         </div>
 
-        <div class="Multiple">
-          <h4>Multiple Dogs / Multiple Kennels</h4>
-          <p>Dogs: $17 per dog per day</p>
+        <div class="shots-container">
+          <h4>Must Have These Shot Records Prior To Boarding</h4>
+          <ul class="shots">
+            <li class="shot">CANINE BIVALENT INFLUENZA VACCINE</li>
+            <li class="shot">DHL</li>
+            <li class="shot">PARVO</li>
+            <li class="shot">RABIES</li>
+            <li class="shot">BORDETELLA</li>
+          </ul>
+          <el-button class="more-btn" type="primary" @click="$router.push('/about')">More Info</el-button>
         </div>
-
-        <p
-          class="rules"
-        >If you have multiple dogs you can put them into one Kennel for a discounted rate. There is a restriction to how you can bundle your dogs into kennels. It depends on the size of your dogs.</p>
-
-        <p class="sizes">3 small dogs = 1 Kennel</p>
-        <p class="sizes">2 small dogs = 1 Kennel</p>
-        <p class="sizes">2 medium dogs = 1 Kennel</p>
-        <p class="sizes">1 Large Dog / 1 Small – Medium Dog = 1 Kennel</p>
       </div>
     </div>
   </div>
@@ -117,11 +123,11 @@ import db from "../db/db";
 import Navbar from "../components/Navbar";
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import Holidays from 'date-holidays'
+import Holidays from "date-holidays";
 import uuid from "uuid";
 import { Notification } from "element-ui";
 
-const hd = new Holidays('US')
+const hd = new Holidays("US");
 
 export default {
   name: "reservation",
@@ -217,46 +223,57 @@ export default {
       "updateKennelStatus"
     ]),
     setWeekendTimeDisabled() {
-      this.options[0].disabled = true
-      this.options[1].disabled = true
-      this.options[2].disabled = false
+      this.options[0].disabled = true;
+      this.options[1].disabled = true;
+      this.options[2].disabled = false;
     },
     setHolidayTimeDisabled() {
-      this.options[0].disabled = true
-      this.options[1].disabled = true
-      this.options[2].disabled = true
+      this.options[0].disabled = true;
+      this.options[1].disabled = true;
+      this.options[2].disabled = true;
     },
     checkTime(date) {
-      const newDate = new Date(date)
-      const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const newDate = new Date(date);
+      const weekdays = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ];
       const day = newDate.getDay();
-      
-      this.options[0].disabled = false
-      this.options[1].disabled = false
-      this.options[2].disabled = true
 
-      if (weekdays[day] === 'Sunday') {
-        this.setWeekendTimeDisabled()
-      } else if (hd.isHoliday(date).name === 'Christmas Eve' || hd.isHoliday(date).name === 'New Year\'s Eve') {
-        this.options[1].disabled = true
-        this.options[2].disabled = true
+      this.options[0].disabled = false;
+      this.options[1].disabled = false;
+      this.options[2].disabled = true;
+
+      if (weekdays[day] === "Sunday") {
+        this.setWeekendTimeDisabled();
+      } else if (
+        hd.isHoliday(date).name === "Christmas Eve" ||
+        hd.isHoliday(date).name === "New Year's Eve"
+      ) {
+        this.options[1].disabled = true;
+        this.options[2].disabled = true;
       } else {
-        if (hd.isHoliday(date).name === 'Christmas Day') {
-          this.setHolidayTimeDisabled()
+        if (hd.isHoliday(date).name === "Christmas Day") {
+          this.setHolidayTimeDisabled();
           Notification.error({
             title: "Closed",
             message: `Sorry we are not open on Christmas Day`,
             duration: 4000
           });
-        } else if (hd.isHoliday(date).name === 'Thanksgiving Day') {
-          this.setHolidayTimeDisabled()
+        } else if (hd.isHoliday(date).name === "Thanksgiving Day") {
+          this.setHolidayTimeDisabled();
           Notification.error({
             title: "Closed",
             message: `Sorry we are not open on Thanksgiving Day`,
             duration: 4000
           });
-        } else if (hd.isHoliday(date).name === 'New Year\'s Day') {
-          this.setHolidayTimeDisabled()
+        } else if (hd.isHoliday(date).name === "New Year's Day") {
+          this.setHolidayTimeDisabled();
           Notification.error({
             title: "Closed",
             message: `Sorry we are not open on New Years Day`,
@@ -477,7 +494,16 @@ export default {
   margin-top: 10px;
 }
 
-@media only screen and (max-width: 1000px) {
+.more-btn {
+  margin-bottom: 50px;
+  font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 1050px) {
+  .res-container {
+    flex-direction: column;
+  }
+
   .reservation-form {
     flex-direction: column;
   }
@@ -493,11 +519,26 @@ export default {
   .pet-card {
     width: 100%;
   }
+
+  .reservation-information {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .shots {
+    text-align: left;
+  }
 }
 
 @media only screen and (max-width: 500px) {
+  form.reservation-container {
+    margin-right: 75px;
+  }
+
   .dates {
     flex-direction: column;
+    width: 95%;
+    margin: 0px auto;
   }
 
   .checkin {
@@ -505,8 +546,11 @@ export default {
   }
 
   div.el-date-editor {
-    width: 330px;
-    margin: 0 auto;
+    width: 350px;
+  }
+
+  .dropdowns {
+    margin-right: 20px;
   }
 
   .pet-profiles {
@@ -526,6 +570,12 @@ export default {
 
   .kennel-select-btn button {
     width: 100%;
+  }
+
+  .reservation-information {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
   }
 }
 </style>

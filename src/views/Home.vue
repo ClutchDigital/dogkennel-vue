@@ -1,37 +1,59 @@
-<template>
+  <template>
   <div class="home">
     <Navbar></Navbar>
 
     <header class="hero">
       <div class="logo-img">
-        <img src="../assets/logo.png" alt="">
+        <img src="../assets/logo.png" alt="Beekel Farms Kennel">
       </div>
 
       <div class="action-btns">
         <el-button type="primary" @click="$router.push('/reservation')">Check Availability</el-button>
-        <el-button type="primary" @click="$router.push('/services')">Learn More</el-button>
+        <el-button type="primary" @click="$router.push('/about')">Learn More</el-button>
       </div>
     </header>
 
     <main>
       <section class="intro">
         <div class="title-container">
-          <h1 class="title">Your Pet Deserves Perfect Care While Having Fun</h1>
-          <h3 class="subtitle">From doggie daycare to overnight boarding and grooming services</h3>
+          <h1 class="title">Adrian’s Top Dog Boarding Kennel</h1>
+          <h3 class="subtitle">Let us take care of your dogs while you are away from home!</h3>
 
           <ul class="work-list">
             <h4>What we have for dogs</h4>
-            <li class="work-item"><i class="fas fa-paw paw-icon"></i> <span class="work-item-description">Trained staff with over 15 years of experience</span></li>
-            <li class="work-item"><i class="fas fa-paw paw-icon"></i> <span class="work-item-description">Clean, well-ventilated indoor / outdoor runs</span></li>
-            <li class="work-item"><i class="fas fa-paw paw-icon"></i> <span class="work-item-description">Heated and air-conditioned inside</span></li>
-            <li class="work-item"><i class="fas fa-paw paw-icon"></i> <span class="work-item-description">Secure military prototype fencing</span></li>
-            <li class="work-item"><i class="fas fa-paw paw-icon"></i> <span class="work-item-description">Special bath price and free nail trim upon request for boarding customers only</span></li>
-            <li class="work-item"><i class="fas fa-paw paw-icon"></i> <span class="work-item-description">Secure, grassy, large, turnout area is an additional option per owner's request</span></li>
+            <li class="work-item">
+              <i class="fas fa-paw paw-icon"></i>
+              <span class="work-item-description">Trained staff with over 25 years of experience</span>
+            </li>
+            <li class="work-item">
+              <i class="fas fa-paw paw-icon"></i>
+              <span class="work-item-description">Clean, well-ventilated indoor / outdoor runs</span>
+            </li>
+            <li class="work-item">
+              <i class="fas fa-paw paw-icon"></i>
+              <span class="work-item-description">Heated and air-conditioned inside</span>
+            </li>
+            <li class="work-item">
+              <i class="fas fa-paw paw-icon"></i>
+              <span class="work-item-description">Secure military prototype fencing</span>
+            </li>
+            <li class="work-item">
+              <i class="fas fa-paw paw-icon"></i>
+              <span
+                class="work-item-description"
+              >Bath and Nail trimming upon request for boarding customers only</span>
+            </li>
+            <li class="work-item">
+              <i class="fas fa-paw paw-icon"></i>
+              <span
+                class="work-item-description"
+              >Secure, grassy, large 1/3 acre turnout area to let your pets get exercise and go to the bathroom</span>
+            </li>
           </ul>
         </div>
 
         <div class="intro-pic">
-          <img src="../assets/twin-dogs.jpg" alt="">
+          <img src="../assets/twin-dogs.jpg" alt="Let us give your dog a home away from home.">
         </div>
       </section>
 
@@ -41,16 +63,22 @@
 
           <div class="services-cards">
             <div class="uk-card uk-card-default uk-card-body uk-card-hover">
-              <h3 class="card-title">Day Care</h3>
-              <p class="card-body">Lorem ipsum sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div class="uk-card uk-card-default uk-card-body uk-card-hover">
               <h3 class="card-title">Dog Boarding</h3>
-              <p class="card-body">Lorem ipsum sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p
+                class="card-body"
+              >We serve as an overnight hotel for you dogs. Drop your dog’s off when you go on vacation or need to take a couple personal days.</p>
             </div>
             <div class="uk-card uk-card-default uk-card-body uk-card-hover">
-              <h3 class="card-title">Grooming</h3>
-              <p class="card-body">Lorem ipsum sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <h3 class="card-title">Turn Out Services</h3>
+              <p
+                class="card-body"
+              >We let your dog’s run around in our ½ acre fenced-in field to run around and go to the bathroom multiple time throughout the day.</p>
+            </div>
+            <div class="uk-card uk-card-default uk-card-body uk-card-hover">
+              <h3 class="card-title">Bath / Nail Trimming</h3>
+              <p
+                class="card-body"
+              >We offer bath and tail trimmings for boarding customer upon request. Ask us in advance before your drop-off date.</p>
             </div>
           </div>
         </section>
@@ -68,12 +96,12 @@
               </div>
               <div class="team">
                 <h2>Professional Team</h2>
-                <p>Dogs supervised by our trained team: one team member per 10 – 15 dogs.</p>
+                <p>We have a team with over 25 years of experience of taking care of your pets.</p>
               </div>
             </div>
           </div>
           <div class="why-pic">
-            <img src="../assets/dog.png" alt="">
+            <img src="../assets/dog.png" alt="Let us give your dog a home away from home.">
           </div>
           <div class="why-2">
             <div class="why-2-container">
@@ -83,7 +111,7 @@
               </div>
               <div class="quality-service">
                 <h2>Quality Services</h2>
-                <p>We offer daycare, overnight boarding, grooming services at one location.</p>
+                <p>We over overnight dog boarding, turnout services, baths and nail trimming (upon request for boarding customers).</p>
               </div>
             </div>
           </div>
@@ -95,31 +123,35 @@
   </div>
 </template>
 
-<script>
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+  <script>
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     Footer,
     Navbar
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+  <style lang="scss" scoped>
 /* HEADER SECTION */
 
 .hero {
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, .25), rgba(0, 0, 0, .25)), url("../assets/dogs.jpg");
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    url("../assets/dogs.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 95vh;
   width: 100%;
   margin-bottom: 80px;
-  
 }
 
 .logo-img {
@@ -152,11 +184,12 @@ export default {
 }
 
 .title-container {
-  max-width: 500px; 
+  max-width: 500px;
 }
 
-.title, .subtitle {
-  color: #001B54;
+.title,
+.subtitle {
+  color: #001b54;
   /* text-align: center; */
 }
 
@@ -181,30 +214,30 @@ export default {
 
 .work-list h4 {
   font-size: 1.5rem;
-  color: #001B54;
+  color: #001b54;
 }
 
 .work-item {
-  display: flex;   
+  display: flex;
   align-items: center;
   margin-bottom: 20px;
   font-size: 1.2rem;
 }
 
 .work-item span {
-  margin-left: 20px;  
+  margin-left: 20px;
   color: #000;
 }
 
 .paw-icon {
-  color: #001B54;
+  color: #001b54;
 }
 
 /* SERVICES SECTION */
 
 .services {
-  padding: 5px 20px 50px 20px;  
-  background: #F3F3F3;
+  padding: 5px 20px 50px 20px;
+  background: #f3f3f3;
 }
 
 .services-container {
@@ -214,22 +247,22 @@ export default {
 
 .services-container h1 {
   text-align: center;
-  color: #001B54;
+  color: #001b54;
   margin-bottom: 50px;
 }
 
 .services-cards {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .uk-card {
-  color: #001B54;
+  color: #001b54;
   width: 370px;
 }
 
 .card-title {
-  color: #C2B59B;
+  color: #c2b59b;
   text-align: center;
   font-size: 2rem;
 }
@@ -245,7 +278,7 @@ export default {
 
 .why h1 {
   text-align: center;
-  color: #001B54;
+  color: #001b54;
 }
 
 .why-container {
@@ -264,28 +297,91 @@ export default {
   margin: 0 auto;
 }
 
-.why-1-container, .why-2-container {
-  margin: 70px auto;
+.why-1-container,
+.why-2-container {
+  margin: 80px auto;
 }
 
-.why-1-container h2, .why-2-container h2 {
+.why-1-container h2,
+.why-2-container h2 {
   font-size: 2rem;
 }
 
-.why-1-container p, .why-2-container p {
+.why-1-container p,
+.why-2-container p {
   font-size: 1.2rem;
   color: #000;
 }
 
+.quality-service {
+  margin-top: 50px;
+}
+
+// Media Queries
+
+@media only screen and (min-width: 1300px) {
+  .intro {
+    width: 1200px;
+  }
+
+  .services-container {
+    width: 1200px;
+  }
+
+  .why-container {
+    margin: 0 auto;
+  }
+
+  .quality-service {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 1240px) {
+  .uk-card {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: 1190px) {
+  .intro-pic img {
+    width: 450px;
+  }
+}
+
+@media only screen and (max-width: 1165px) {
+  .services-cards {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .uk-card {
+    width: 80%;
+    margin: 0px auto 40px auto;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 1093px) {
+  .work-list h4 {
+    font-size: 1.2rem;
+  }
+
+  .work-item {
+    width: 400px;
+  }
+}
+
 @media only screen and (max-width: 993px) {
-    /* INTRO SECTION */
+  /* INTRO SECTION */
 
   .intro {
     flex-direction: column;
     margin: 0 auto;
   }
 
-  .title-container, .intro-pic {
+  .title-container,
+  .intro-pic {
     margin: 0 auto;
   }
 
@@ -295,6 +391,8 @@ export default {
 
   .work-item {
     flex-direction: column;
+    margin: 0 auto;
+    width: 95%;
   }
 
   .paw-icon {
@@ -312,15 +410,6 @@ export default {
     margin-top: 100px;
   }
 
-  .services-cards {
-    flex-direction: column;
-  }
-
-  .uk-card {
-    margin: 0px auto 40px auto;
-    width: 100%;
-  }
-
   /* WHY SECTION */
 
   .why {
@@ -332,15 +421,23 @@ export default {
   }
 
   .why-pic {
-    display: none;
+    width: 400px;
+    margin: -30px auto 40px auto;
   }
 
-  .support, .pricing {
+  .support,
+  .pricing {
     margin-bottom: 40px;
   }
 
   .pricing {
     margin-top: -80px;
+  }
+}
+
+@media only screen and (max-width: 525px) {
+  .uk-card {
+    width: 95%;
   }
 }
 </style>

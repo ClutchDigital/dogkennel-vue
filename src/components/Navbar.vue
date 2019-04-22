@@ -2,7 +2,8 @@
   <section class="nav-container">
     <div v-if="!isLoggedIn" class="reservation-sign-up">
       <h3>
-        <router-link class="auth-btn" to="/signup">Sign Up</router-link> or <router-link class="auth-btn" to="/login">Login</router-link> to make a reservation!
+        <router-link class="auth-btn" to="/signup">Sign Up</router-link>or
+        <router-link class="auth-btn" to="/login">Login</router-link>to make a reservation!
       </h3>
     </div>
     <nav class="nav">
@@ -11,13 +12,24 @@
           <h3>Beekel Farms Kennel</h3>
         </div>
         <ul class="navbar-nav">
-          <li class="nav-item link"><router-link class="nav-link" to="/">Home</router-link></li>
-          <li class="nav-item link"><router-link class="nav-link" to="/about">About Us</router-link></li>
-          <li class="nav-item link"><router-link class="nav-link" to="/services">Services</router-link></li>
+          <li class="nav-item link">
+            <router-link class="nav-link" to="/">Home</router-link>
+          </li>
+          <li class="nav-item link">
+            <router-link class="nav-link" to="/about">About Us</router-link>
+          </li>
           <li class="nav-item link" @click="$router.push('/reservation')">Reservation</li>
-          <li v-for="item in menu" :key="item.name" class="nav-item link"><router-link :to="item.to" class="nav-link">{{ item.name }}</router-link></li>
-          <li @click="onLogout" v-if="isLoggedIn" class="nav-item link"><router-link class="nav-link" to="/login">Logout</router-link></li>
-          <li class="nav-item menu"><a class="menu-btn" href="#sidebar" uk-toggle><i class="fas fa-bars"></i></a></li>
+          <li v-for="item in menu" :key="item.name" class="nav-item link">
+            <router-link :to="item.to" class="nav-link">{{ item.name }}</router-link>
+          </li>
+          <li @click="onLogout" v-if="isLoggedIn" class="nav-item link">
+            <router-link class="nav-link" to="/login">Logout</router-link>
+          </li>
+          <li class="nav-item menu">
+            <a class="menu-btn" href="#sidebar" uk-toggle>
+              <i class="fas fa-bars"></i>
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -30,12 +42,21 @@
           </div>
 
           <ul class="side-nav">
-            <li class="side-nav-item"><router-link to="/" class="side-nav-link">Home</router-link></li>
-            <li class="side-nav-item"><router-link to="/about" class="side-nav-link">About Us</router-link></li>
-            <li class="side-nav-item"><router-link to="/services" class="side-nav-link">Services</router-link></li>
-            <li class="side-nav-item"><router-link to="/reservation" class="side-nav-link">Reservation</router-link></li>
-            <li v-for="item in menu" :key="item.name"  class="side-nav-item"><router-link :to="item.to" class="side-nav-link">{{ item.name }}</router-link></li>
-            <li @click="onLogout" v-if="isLoggedIn" class="side-nav-item"><router-link class="side-nav-link" to="/login">Logout</router-link></li>
+            <li class="side-nav-item">
+              <router-link to="/" class="side-nav-link">Home</router-link>
+            </li>
+            <li class="side-nav-item">
+              <router-link to="/about" class="side-nav-link">About Us</router-link>
+            </li>
+            <li class="side-nav-item">
+              <router-link to="/reservation" class="side-nav-link">Reservation</router-link>
+            </li>
+            <li v-for="item in menu" :key="item.name" class="side-nav-item">
+              <router-link :to="item.to" class="side-nav-link">{{ item.name }}</router-link>
+            </li>
+            <li @click="onLogout" v-if="isLoggedIn" class="side-nav-item">
+              <router-link class="side-nav-link" to="/login">Logout</router-link>
+            </li>
           </ul>
         </div>
       </div>
@@ -44,41 +65,39 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters('auth', ['user']),
+    ...mapGetters("auth", ["user"]),
     isLoggedIn() {
-      return this.user !== null && this.user !== undefined
+      return this.user !== null && this.user !== undefined;
     },
     menu() {
       let menuItems = [
-        { to: '/signup', name: 'Sign Up' },
-        { to: '/login', name: 'Login' },
-      ]
+        { to: "/signup", name: "Sign Up" },
+        { to: "/login", name: "Login" }
+      ];
       if (this.isLoggedIn) {
-        menuItems = [
-          { to: `/profile/${this.user.user_id}`, name: 'Profile' },
-        ]
+        menuItems = [{ to: `/profile/${this.user.user_id}`, name: "Profile" }];
       }
-      return menuItems
-    },
+      return menuItems;
+    }
   },
   methods: {
-    ...mapActions('auth', ['logout']),
-    ...mapActions('profile', ['resetState']),
-    ...mapActions('reservation', ['resetResState']),
+    ...mapActions("auth", ["logout"]),
+    ...mapActions("profile", ["resetState"]),
+    ...mapActions("reservation", ["resetResState"]),
     onLogout() {
-      this.logout()
-      this.resetState()
-      this.resetResState()
+      this.logout();
+      this.resetState();
+      this.resetResState();
       if (!this.isLoggedIn) {
-        this.$router.push('/login')
+        this.$router.push("/login");
       }
-    },
+    }
   }
-}
+};
 </script>
 
 
@@ -86,7 +105,7 @@ export default {
 // RESERVATION HEADER SECTION
 
 .reservation-sign-up {
-  background: #C2B59B;
+  background: #c2b59b;
   height: 100%;
   padding: 8px;
 }
@@ -94,7 +113,7 @@ export default {
 .reservation-sign-up h3 {
   margin: 0 auto;
   text-align: center;
-  color: #001B54;
+  color: #001b54;
 }
 
 .reservation-sign-up h3 .auth-btn {
@@ -105,7 +124,7 @@ export default {
 
 .nav {
   padding: 10px;
-  background: #001B54;
+  background: #001b54;
 }
 
 .navbar {
@@ -116,7 +135,7 @@ export default {
   margin: 0 auto;
 }
 
-.navbar-brand h3{
+.navbar-brand h3 {
   color: #fff;
   margin: 0 auto;
 }
@@ -131,7 +150,7 @@ export default {
   margin-left: 10px;
   color: #fff;
   font-size: 1.2rem;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .nav-link {
@@ -151,7 +170,7 @@ export default {
 
 .menu-btn {
   font-size: 2rem;
-  cursor: pointer; 
+  cursor: pointer;
   color: #fff;
 }
 
@@ -160,7 +179,7 @@ export default {
 }
 
 .uk-offcanvas-bar {
-  background: #001B54 !important;
+  background: #001b54 !important;
   width: 350px !important;
 }
 

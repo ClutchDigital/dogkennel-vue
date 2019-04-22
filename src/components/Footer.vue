@@ -36,16 +36,15 @@
         </div>
       </div>
 
-      <div class="contact-form">
-        <h2>Want More Info</h2>
-
-        <form action class="form">
-          <input type="text" placeholder="Name" name="name" id="name">
-          <input type="email" placeholder="Email" name="email" id="email">
-          <textarea name="message" id="message" cols="30" rows="3" placeholder="Message..."></textarea>
-          <button type="submit">SEND</button>
-        </form>
-      </div>
+      <iframe
+        class="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.8136159001488!2d-84.12394138416545!3d41.875356379222374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883cee0088b3b533%3A0x9d182903b4f7b9b1!2sBeekel+Farms+Kennels!5e0!3m2!1sen!2sus!4v1555374070167!5m2!1sen!2sus"
+        width="600"
+        height="450"
+        frameborder="0"
+        style="border:0"
+        allowfullscreen
+      ></iframe>
     </div>
   </footer>
 </template>
@@ -85,47 +84,19 @@ footer {
   color: #fff;
 }
 
-.contact-form {
-  width: 500px;
-}
-
-.contact-form h2 {
-  color: #fff;
-  text-align: center;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.form input {
-  padding: 10px;
-  font-size: 1.2rem;
-  color: #001b54;
-  margin-bottom: 15px;
-  border: none;
-}
-
-.form textarea {
-  padding: 8px;
-  font-size: 1.2rem;
-  color: #001b54;
-  margin-bottom: 15px;
-  border: none;
-}
-
-.form button {
-  padding: 10px;
-  font-size: 1.2rem;
-  color: #001b54;
-  background: #c2b59b;
-  border: none;
-  cursor: pointer;
-}
-
 /* MEDIA QUERY SECTION */
+
+@media only screen and (max-width: 1430px) {
+  .map {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: 1160px) {
+  .hours-container {
+    width: 450px;
+  }
+}
 
 @media only screen and (max-width: 993px) {
   /* FOOTER SECTION */
@@ -139,13 +110,18 @@ footer {
     text-align: center;
   }
 
-  .contact-form {
-    margin: 40px auto 0px auto;
-    width: 100%;
+  .hours h2 {
+    margin: 40px auto auto auto;
   }
 
-  .form {
-    margin: 0 auto;
+  .hours-container {
+    width: 90%;
+    margin: 20px auto auto auto;
+  }
+
+  .map {
+    width: 80%;
+    margin: 40px auto auto auto;
   }
 }
 </style>

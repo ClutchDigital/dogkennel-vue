@@ -51,19 +51,25 @@ export default new Vuex.Store({
 
   actions: {
     adminLogin({ commit }, admin) {
-      firebase.auth().signInWithEmailAndPassword(admin.email, admin.password).then(user => {
-        const newAdminUser = {
-          user_id: user.user.uid,
-          email: user.user.email,
-        }
-        commit('setAdminUser', newAdminUser)
-        router.push('/admin/bfk')
-      }).catch(error => {
-        console.log(error)
-      })
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(admin.email, admin.password)
+        .then(user => {
+          const newAdminUser = {
+            user_id: user.user.uid,
+            email: user.user.email
+          }
+          commit('setAdminUser', newAdminUser)
+          router.push('/admin/bfk')
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     getAllReservations({ commit }) {
-      const reservationsRef = db.collection('reservations').orderBy('checkin_date', 'asc')
+      const reservationsRef = db
+        .collection('reservations')
+        .orderBy('checkin_date', 'asc')
 
       const allReservations = []
       reservationsRef.get().then(snapShot => {
@@ -76,18 +82,26 @@ export default new Vuex.Store({
     },
     runReservationSearch({ commit }, query) {
       if (query.option === 'Arrival') {
-        const reservationsRef = db.collection('reservations').where('checkin_date', '>=', query.date1).where('checkin_date', '<=', query.date2).orderBy('checkin_date', 'asc')
+        const reservationsRef = db
+          .collection('reservations')
+          .where('checkin_date', '>=', query.date1)
+          .where('checkin_date', '<=', query.date2)
+          .orderBy('checkin_date', 'asc')
         commit('setLoading', true)
         const allReservations = []
         reservationsRef.get().then(snapShot => {
-          snapShot.docs.forEach(doc => { 
+          snapShot.docs.forEach(doc => {
             allReservations.push(doc.data())
             commit('setAllReservations', allReservations)
             commit('setLoading', false)
           })
-        })  
+        })
       } else {
-        const reservationsRef = db.collection('reservations').where('dates.checkout_date', '>=', query.date1).where('dates.checkout_date', '<=', query.date2).orderBy('dates.checkout_date', 'asc')
+        const reservationsRef = db
+          .collection('reservations')
+          .where('dates.checkout_date', '>=', query.date1)
+          .where('dates.checkout_date', '<=', query.date2)
+          .orderBy('dates.checkout_date', 'asc')
         commit('setLoading', true)
         const allReservations = []
         reservationsRef.get().then(snapShot => {
@@ -104,31 +118,38 @@ export default new Vuex.Store({
 
       profileRef.get().then(snapShot => {
         snapShot.docs.forEach(doc => {
-          commit('setSelectedProfile', {...doc.data()})
+          commit('setSelectedProfile', { ...doc.data() })
         })
         dispatch('getPetProfiles', id)
         dispatch('getSelectedProfileReservations', id)
       })
     },
     getPetProfiles: ({ commit }, id) => {
-      db.collection('pet-profiles').where('user_id', '==', id).get().then(snapShot => {
-        const petProfiles = []
-        snapShot.docs.forEach(doc => {
-          petProfiles.push({...doc.data()})
+      db.collection('pet-profiles')
+        .where('user_id', '==', id)
+        .get()
+        .then(snapShot => {
+          const petProfiles = []
+          snapShot.docs.forEach(doc => {
+            petProfiles.push({ ...doc.data() })
+          })
+          commit('setSelectedProfilePets', petProfiles)
         })
-        commit('setSelectedProfilePets', petProfiles)
-      }).catch(err => {
-        console.log(err)
-      })
+        .catch(err => {
+          console.log(err)
+        })
     },
     getSelectedProfileReservations: ({ commit }, id) => {
-      db.collection('reservations').where('creator_id', '==', id).get().then(snapShot => {
-        const reservations = []
-        snapShot.docs.forEach(doc => {
-          reservations.push({...doc.data()})
+      db.collection('reservations')
+        .where('creator_id', '==', id)
+        .get()
+        .then(snapShot => {
+          const reservations = []
+          snapShot.docs.forEach(doc => {
+            reservations.push({ ...doc.data() })
+          })
+          commit('setSelectedProfileReservations', reservations)
         })
-        commit('setSelectedProfileReservations', reservations)
-      })
     },
     getAllUsers: ({ commit }) => {
       const usersRef = db.collection('profiles').orderBy('lastName', 'asc')
@@ -136,7 +157,7 @@ export default new Vuex.Store({
       const users = []
       usersRef.get().then(snapShot => {
         snapShot.docs.forEach(doc => {
-          users.push({...doc.data()})
+          users.push({ ...doc.data() })
         })
         commit('setAllUsers', users)
       })
@@ -145,28 +166,33 @@ export default new Vuex.Store({
     // RESERVATION FUNCTIONS
     async saveUserReservation({ dispatch }, reservation) {
       const reservationsRef = db.collection('reservations')
-  
+
       await reservationsRef.add(reservation)
       await dispatch('getAllReservations')
-      router.push('/admin/bfk/reservations') 
-    },   
+      router.push('/admin/bfk/reservations')
+    },
     cancelReservation({ state, dispatch }, res) {
-      db.collection('reservations').where('res_id', '==', res.res_id).get().then(snapShot => {
-        snapShot.docs.forEach(doc => {
-          doc.ref.delete()
-          console.log('Deleted')
+      db.collection('reservations')
+        .where('res_id', '==', res.res_id)
+        .get()
+        .then(snapShot => {
+          snapShot.docs.forEach(doc => {
+            doc.ref.delete()
+            console.log('Deleted')
+          })
+          dispatch('getAllReservations')
+          if (state.selectedProfile) {
+            dispatch('getSelectedProfileReservations', res.creator_id)
+          }
         })
-        dispatch('getAllReservations')
-        if (state.selectedProfile) {
-          dispatch('getSelectedProfileReservations', res.creator_id)
-        }
-      })
     },
 
     // UPDATE FUNCTIONS
     updateProfile({ commit }, profile) {
-      const profileRef = db.collection('profiles').where('user_id', '==', profile.user_id)
-      
+      const profileRef = db
+        .collection('profiles')
+        .where('user_id', '==', profile.user_id)
+
       profileRef.get().then(snapShot => {
         snapShot.docs.forEach(doc => {
           doc.ref.update({
@@ -178,7 +204,7 @@ export default new Vuex.Store({
             vetEmail: profile.vetEmail,
             vetAddress: profile.vetAddress,
             vetPhone: profile.vetPhone,
-            vetFax: profile.vetFax  
+            vetFax: profile.vetFax
           })
 
           const updatedProfile = profile
@@ -189,28 +215,45 @@ export default new Vuex.Store({
 
     // ADD CUSTOMERS
     signUpEmail({ dispatch }, payload) {
-      firebase.auth().createUserWithEmailAndPassword(payload.profile.email, payload.profile.password).then(user => {
-        const newUser = {
-          user_id: user.user.uid,
-          email: user.user.email,
-        }
-        db.collection('users').doc(newUser.user_id).set(newUser)
-        
-        delete payload.profile.password
-        const newUserProfile = {...payload.profile, user_id: newUser.user_id}
-        const petProfile = {...payload.petProfile, user_id: newUser.user_id}
-        dispatch('saveProfile', newUserProfile)
-        dispatch('addPetProfile', petProfile)
-        router.push('/admin/bfk/search')  
-      })
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(
+          payload.profile.email,
+          payload.profile.password
+        )
+        .then(user => {
+          console.log(user.user.uid)
+          const newUser = {
+            user_id: user.user.uid,
+            email: user.user.email
+          }
+          db.collection('users')
+            .doc(newUser.user_id)
+            .set(newUser)
+
+          // delete payload.profile.password
+          const newUserProfile = {
+            ...payload.profile,
+            user_id: newUser.user_id
+          }
+          const petProfile = { ...payload.petProfile, user_id: newUser.user_id }
+          dispatch('saveProfile', newUserProfile)
+          dispatch('addPetProfile', petProfile)
+          router.push('/admin/bfk/search')
+        })
     },
     saveProfile: (_, payload) => {
-      db.collection('profiles').add({...payload})
+      db.collection('profiles').add({ ...payload })
     },
     addPetProfile: ({ state, dispatch }, payload) => {
-      db.collection('pet-profiles').add({...payload, user_id: state.selectedProfile.user_id, profile_id: uuid()})
-      dispatch('getPetProfiles', state.selectedProfile.user_id)
-    },
+      db.collection('pet-profiles').add({
+        ...payload,
+        // user_id: state.selectedProfile.user_id,
+        user_id: payload.user_id,
+        profile_id: uuid()
+      })
+      dispatch('getPetProfiles', payload.user_id)
+    }
   },
 
   getters: {
@@ -226,6 +269,6 @@ export default new Vuex.Store({
   modules: {
     auth,
     profile,
-    reservation,
+    reservation
   }
 })
