@@ -1,13 +1,13 @@
 import firebase from 'firebase'
 
 const config = {
-  apiKey: "AIzaSyB8B-arxMWU6g4btfaWeAABMDplaIY5NWA",
-  authDomain: "beekelfarmskennel-1.firebaseapp.com",
-  databaseURL: "https://beekelfarmskennel-1.firebaseio.com",
-  projectId: "beekelfarmskennel-1",
-  storageBucket: "beekelfarmskennel-1.appspot.com",
-  messagingSenderId: "955426638441"
-};
-firebase.initializeApp(config);
+  apiKey: 'AIzaSyDPelvtM68dd_rZuhqpyOaVj-W6MToyX9o',
+  authDomain: 'beekelfarmskennel-8812a.firebaseapp.com',
+  databaseURL: 'https://beekelfarmskennel-8812a.firebaseio.com',
+  projectId: 'beekelfarmskennel-8812a',
+  storageBucket: 'beekelfarmskennel-8812a.appspot.com',
+  messagingSenderId: '1026150645025'
+}
+firebase.initializeApp(config)
 
-export default firebase;
+export default firebase
